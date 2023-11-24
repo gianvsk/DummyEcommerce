@@ -1,0 +1,30 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/tailwindcss": "^6.8.1",
+    "nuxt": "^3.8.0",
+    "vue": "^3.3.7",
+    "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@commercelayer/cli": "^5.15.1",
+    "@commercelayer/js-auth": "^4.2.0",
+    "@commercelayer/sdk": "^5.19.2",
+    "@formkit/nuxt": "^1.2.2",
+    "@nuxt/image": "^1.1.0",
+    "@nuxtjs/algolia": "^1.10.1",
+    "@vueuse/core": "^10.6.0",
+    "algoliasearch": "^4.20.0",
+    "nuxt-swiper": "^1.2.2"
+  }
+}
