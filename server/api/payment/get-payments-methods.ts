@@ -11,6 +11,5 @@ export default defineEventHandler(async(event) => {
             Authorization: `Bearer ${token}`
         }
     })
-    console.log(getPaymentMethods.data)
     return getPaymentMethods
 })

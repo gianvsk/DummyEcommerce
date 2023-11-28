@@ -13,8 +13,6 @@ export default defineEventHandler(async(event) => {
         }
     })
 
-    console.log('ship', getShippingMethods.data)
-
     return getShippingMethods
 
 })

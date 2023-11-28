@@ -1,4 +1,3 @@
-import { useCart } from "~/composables/useCart"
 import { useLayerToken } from "~/composables/useLayerToken"
 
 export default defineEventHandler(async(event) => {

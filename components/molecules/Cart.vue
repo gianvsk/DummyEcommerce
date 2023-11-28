@@ -15,17 +15,17 @@ const showCart = () => {
     showCartModal()
 }
 
-onClickOutside(target, () => openCart.value = false)
+/* onClickOutside(target, () => openCart.value = false) */
 
 </script>
 
 <template>
-    <div ref="target">
+    <div>
         <button @click="showCart">
             <img src="/icons/Cart.svg" />
         </button>
     </div>
-    <div v-show="open" :class="[' hidden lg:block absolute w-96 top-12 right-10 p-1 bg-gray-100 z-10 rounded-lg lg:w-[500px]',
+    <div v-show="open" ref="target" :class="[' hidden lg:block absolute w-96 top-12 right-10 p-1 bg-gray-100 z-10 rounded-lg lg:w-[500px]',
         !cart ? ' h-60 flex items-center justify-center' : '']">
         <h5 class=" text-3xl font-sans font-bold mb-2 p-1">Cart</h5>
         <div v-if="currentCart" class="flex flex-col gap-y-1">

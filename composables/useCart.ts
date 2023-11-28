@@ -5,34 +5,24 @@ export const useCart = () => {
   const cart = useState("cart", () => []);
   const checkout = useState("checkout", () => [])
   const openCart = useState("openCart", () => false)
-  const openCartModal = useState("operCartModal", () => false)
+  const openCartModal = useState("openCartModal", () => false)
+
+  const cartCookieId = useCookie("cartId", {watch: true})
   const organization = useRuntimeConfig().commercelayerOrganization
 
   const refreshCart = async () => {
-    const refreshedCart = await $fetch("/api/load-cart");
+    const { data: refreshedCart } = await $fetch("/api/load-cart");
     cart.value = refreshedCart.included
     checkout.value = refreshedCart.data.attributes
   };
 
   const checkCookie = async () => {
-    const cartCookieId = useCookie("cartId", {watch: true})
     if (!cartCookieId.value) {
       const createCartId = await $fetch("/api/create-cart", {
         method: "POST",
       });
       cartCookieId.value = createCartId
     }
-  };
-
-  const deleteItemFromCart = async(id: string, token: string) => {
-    const deleteItem = await $fetch(`http://${organization}.commercelayer.io/api/line_items/${id}`, {
-      method: 'DELETE',
-      headers: {
-        Accept: 'application/vnd.api+json',
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/vnd.api+json'
-      }
-    })
   }
 
   const openModal = () => {
@@ -51,5 +41,5 @@ export const useCart = () => {
     openCartModal.value = false
   }
 
-  return { cart, checkout, checkCookie, refreshCart, deleteItemFromCart, openCart, openModal, closeCart, openCartModal, showCartModal, closeCartModal };
+  return { cart, checkout, checkCookie, refreshCart, openCart, openModal, closeCart, openCartModal, showCartModal, closeCartModal };
 };

@@ -57,9 +57,9 @@ const reduceQuantity = () => {
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <AtomsButton source="/icons/Plus.svg" :background="true" :small="true" @click="increaseQuantity" />
-                        <h5>{{ quantity }}</h5>
                         <AtomsButton source="/icons/MinusNoCircle.svg" :background="true" :small="true" @click="reduceQuantity" />
+                        <h5>{{ quantity }}</h5>
+                        <AtomsButton source="/icons/Plus.svg" :background="true" :small="true" @click="increaseQuantity" />
                         <AtomsButton source="/icons/CartPlusSolid.svg" :background="true" @click="addSelectedItem" :right="true"/>
                     </div>
                 </div>

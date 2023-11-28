@@ -1,29 +1,37 @@
 import { useLayerToken } from "~/composables/useLayerToken";
-import { index } from '../../algolia/algolia'
-import { useGetProductByCode } from "~/composables/useGetProductByCode";
+import { index } from "~/algolia/algolia";
 
 export default defineEventHandler(async (event) => {
   const organization = useRuntimeConfig().commercelayerOrganization;
-  const token = await useLayerToken();
+  const token = await useLayerToken()
   const body = await readBody(event);
 
-  const actualCode = body.fields.code["en-US"]
+  const code = body.fields.code["en-US"]
   const actualQuantity = body.fields.quantity["en-US"]
 
-  const sku = await useGetProductByCode(actualCode, organization, token)
-  
-  const stockItemLink = sku.relationships.stock_items.links.related
+  const { data: productSku } = await $fetch<any>(
+    `https://${organization}.commercelayer.io/api/skus?filter[q][code_eq]=${code}&fields[skus]=id,prices,stock_items`,
+    {
+      headers: {
+        Accept: "application/vnd.api+json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
-  const stockItem : any = await $fetch(stockItemLink, {
+  const skuId = productSku[0].id
+  const stockItemLink = productSku[0].relationships.stock_items.links.related
+
+  const {data: stockItem} = await $fetch<any>(stockItemLink, {
     headers: {
       Accept: "application/vnd.api+json",
       Authorization: `Bearer ${token}`,
     },
-  });
+  })
 
-  const stockItemId = stockItem.data[0].id
+  const stockItemId = stockItem[0].id
 
-  const newQuantity = await $fetch(
+  const newStockItemQuantity = await $fetch(
     `https://${organization}.commercelayer.io/api/stock_items/${stockItemId}`,
     {
       method: "PATCH",
@@ -44,9 +52,13 @@ export default defineEventHandler(async (event) => {
     }
   );
 
-  index.partialUpdateObjects([{quantity: actualQuantity, objectID: sku.id}]).then(({ objectIDs }) => {
-    console.log(objectIDs);
-  });
+  if(!newStockItemQuantity) {
+    throw createError({status: 500, message: 'Product quantity not updated'})
+  } else {
+    index.partialUpdateObjects([{quantity: actualQuantity, objectID: skuId}]).then(({ objectIDs }) => {
+      console.log(objectIDs);
+    });
+  }
 
   return {
     status:200,

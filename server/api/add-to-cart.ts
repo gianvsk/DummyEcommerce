@@ -4,8 +4,10 @@ export default defineEventHandler(async (event) => {
   const organization = useRuntimeConfig().commercelayerOrganization;
   const token = await useLayerToken();
   const product = await readBody(event);
+
   const currentProduct = product.data.product;
   const currentQuantity = product.data.quantity;
+  
   const cookieCartId = getCookie(event, "cartId");
 
   if (currentProduct.name !== "Apple Airpods Pro White") {
