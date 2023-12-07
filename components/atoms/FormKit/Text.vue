@@ -4,7 +4,6 @@ defineProps<{
     text: string
     name: string
     id?: string
-    required?: boolean
 }>()
 
 </script>
@@ -16,7 +15,10 @@ defineProps<{
         validation="required"
         validation-visibility="blur"
         :classes="{
-            input: 'border border-gray-400 rounded-md'
+            input: 'border border-gray-400 rounded-sm p-1',
+            outer: 'relative',
+            messages: 'absolute top-15 left-0',
+            message: 'font-sans text-xs font-medium text-red-500'
 
         }"
         :id="id"

@@ -12,6 +12,6 @@
 
 <template>
 
-    <div v-if="background" class="absolute inset-0 bg-gray-400/80 z-10 lg:hidden" @click="closeModal"/>
+    <div v-if="background" class="absolute inset-0 bg-gray-400/80 z-10 md:hidden" @click="closeModal"/>
 
 </template>

@@ -10,7 +10,7 @@
 
 <template>
 
-    <NuxtLink :to="link ? link : '/'" :class="['py-[10px] px-6 bg-yellow-500 text-black rounded-[100px] flex justify-center',  size === 'small' ? 'w-min' : 'w-max self-end']">
+    <NuxtLink :to="link ? link : '/'" :class="['py-[10px] px-6 bg-gray-800 flex justify-center text-white rounded-sm',  size === 'small' ? 'w-min ' : 'w-full self-end']">
         {{ text }}
     </NuxtLink>
 

@@ -5,7 +5,14 @@ export default defineEventHandler(async (event) => {
   const token = await useLayerToken();
   const cartId = getCookie(event, "cartId");
 
-/*   const createShipping = await $fetch(
+  const shippingMethods = await $fetch(`https://gianvitoshop.commercelayer.io/api/shipping_methods`, {
+    headers: {
+      Accept: 'application/vnd.api+json',
+      Authorization: `Bearer ${token}`
+    }
+  })
+
+  const createShipping = await $fetch(
     `https://${organization}.commercelayer.io/api/shipments`,
     {
       method: "POST",
@@ -29,10 +36,16 @@ export default defineEventHandler(async (event) => {
                 type: "inventory_stock_locations",
                 id: "vjqRPSzXzW"
               }
+            },
+            shipping_method: {
+              data: {
+                type: "shipping_method",
+                id: ["mVARXFRzPE", "mOJQoFnwLE" ]
+              }
             }
           }
         }
       },
     }
-  ); */
+  );
 });

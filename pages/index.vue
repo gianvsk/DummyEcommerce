@@ -20,7 +20,9 @@ const setOpenedSelect = (value: string) => {
 <template>
   <ais-instant-search :search-client="algolia" index-name="products"
     :class-names="{ 'ais-InstantSearch': 'flex flex-col gap-7' }">
-    <ais-breadcrumb :attributes="['categories']" />
+    <ais-breadcrumb :attributes="['categories']" :classes="{
+      'ais-Breadcrumb-link': 'font-light'
+    }" />
     <div class="pills-wrapper">
       <MoleculesBadgesWrapper />
     </div>
@@ -28,11 +30,12 @@ const setOpenedSelect = (value: string) => {
       <div>
         <AtomsPill label="Brands" @send-open-select="setOpenedSelect">
           <div
-            :class="['absolute z-[1] top-full left-0 w-auto h-auto bg-blue-200 rounded-lg', openedModal === 'brands' ? 'flex p-4' : 'hidden']">
+            :class="['absolute z-[1] top-[105%] left-0 w-auto h-auto border bg-white border-gray-800 rounded-lg', openedModal === 'brands' ? 'flex p-1' : 'hidden']">
             <ais-refinement-list attribute="brand" :sort-by="['name:asc']" :class-names="{
-              'ais-RefinementList-list': 'flex flex-col w-max',
-              'ais-RefinementList-label': 'flex gap-2 items-center',
-              'ais-RefinementList-count': '!w-[20px] !h-[20px] !bg-blue-200 !inline-flex !items-center !justify-center !rounded-full'
+              'ais-RefinementList-list': 'flex flex-col w-full bg-white',
+              'ais-RefinementList-label': 'w-full flex gap-2 items-center p-2 bg-white border-b border-gray-200',
+              'ais-RefinementList-labelText': 'text-left text-xl',
+              'ais-RefinementList-count': '!bg-white !rounded-full !w-5 !h-5 !ml-auto'
             }" />
           </div>
         </AtomsPill>
@@ -40,14 +43,16 @@ const setOpenedSelect = (value: string) => {
       <div>
         <AtomsPill label="Price" @send-open-select="setOpenedSelect">
           <div
-            :class="['absolute z-[1] top-full left-0 w-auto h-auto bg-blue-200 rounded-lg', openedModal === 'price' ? 'flex p-4' : 'hidden']">
+            :class="['absolute z-[1] top-[105%] left-0 w-auto h-auto bg-white border border-gray-800 rounded-lg', openedModal === 'price' ? 'flex p-1' : 'hidden']">
             <ais-numeric-menu attribute="price" :items="[
-              { label: ' < 100€', end: 100 },
+              { label: ' less than 100€', end: 100 },
               { label: ' 100 < 1000€', start: 100, end: 1000 },
-              { label: ' >= 1000€ ', start: 1000 },
-              { label: ' Show All' },
+              { label: ' more than 1000€ ', start: 1000 },
+              { label: ' Show all' },
             ]" :class-names="{
-  'ais-NumericMenu-item': 'w-max'
+              'ais-NumericMenu-list': 'w-max',
+              'ais-NumericMenu-item': 'w-full py-1 bg-white border-b border-gray-200',
+              'ais-NumericMenu-label': 'flex items-center justify-between gap-2 p-2'
 }" />
           </div>
         </AtomsPill>
@@ -55,7 +60,7 @@ const setOpenedSelect = (value: string) => {
     </div>
     <div class="product-list">
       <ais-infinite-hits :class-names="{
-        'ais-InfiniteHits-list': 'flex flex-col gap-5 !mt-0 !ml-0 lg:!grid lg:grid-cols-2 2xl:grid-cols-3 lg:gap-x-7 lg:gap-y-[26px]',
+        'ais-InfiniteHits-list': 'flex flex-col gap-5 !mt-0 !ml-0 md:!grid md:grid-cols-2 2xl:grid-cols-3 lg:gap-x-7 lg:gap-y-[26px]',
         'ais-InfiniteHits-item': '!w-full !p-0 !m-0 !border-0 !shadow-none'
       }">
         <template v-slot:item="{ item }">

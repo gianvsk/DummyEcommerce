@@ -24,7 +24,7 @@ onClickOutside(searchbar.value, () => closeSearchbar())
                             No results found for the query: <q>{{ query }}</q>
                         </div>
                         <div v-if="hits.length > 0 && query.length > 2"
-                            class="absolute top-11 left-0 right-0 bg-[#f1f1f1] z-[5] flex flex-col justify-between gap-2 p-4 rounded-b-lg min-h-[387.2px] md:top-0 lg:min-h-[455.2px]">
+                            class="absolute top-11 left-0 right-0 bg-[#f1f1f1] z-[5] flex flex-col justify-between gap-2 p-4 rounded-b-lg min-h-[387.2px] md:top-0 lg:min-h-[515.2px]">
                             <div class="flex flex-col gap-2">
                                 <div v-for="hit in hits">
                                     <MoleculesSearchbarResult :item="hit" :key="hit.name" />

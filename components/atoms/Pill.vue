@@ -25,7 +25,7 @@ onClickOutside(target, () => {
 
 <template>
     <div class="relative" ref="target">
-        <button class="px-4 py-2 bg-blue-400 text-sm text-white rounded-full" @click="sendOpenSelect">
+        <button class="px-4 py-2 bg-gray-800 text-sm text-white rounded-full" @click="sendOpenSelect">
             {{ label }}
         </button>
         <div v-show="show">

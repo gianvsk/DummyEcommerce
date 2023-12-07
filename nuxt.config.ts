@@ -25,6 +25,8 @@ export default defineNuxtConfig({
     commercelayerOrganization: process.env.NUXT_COMMERCE_LAYER_ORGANIZATION,
     nuxtAlgoliaApplicationID: process.env.NUXT_ALGOLIA_APPLICATION_ID,
     nuxtAlgoliaSearchApiKey: process.env.NUXT_ALGOLIA_SEARCH_API_KEY,
-    nuxtAlgoliaAdminApiKey: process.env.NUXT_ALGOLIA_ADMIN_API_KEY
+    nuxtAlgoliaAdminApiKey: process.env.NUXT_ALGOLIA_ADMIN_API_KEY,
+    axerveApiKey: process.env.NUXT_AXERVE_API_KEY,
+    axerveShopLogin: process.env.NUXT_AXERVE_SHOP_LOGIN
   }
 })

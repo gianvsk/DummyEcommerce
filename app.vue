@@ -1,14 +1,15 @@
 <script setup lang="ts">
 
-const { checkCookie, refreshCart } = useCart()
+const { checkCookie } = useCart()
 
-checkCookie()
-refreshCart()
+onBeforeMount(() => {
+  checkCookie()
+})
 
 </script>
 
 <template>
-  <div class="lg:grid lg:grid-cols-12">
+  <div class="relative lg:grid lg:grid-cols-12">
     <div class="hidden lg:block lg:col-start-1 lg:col-end-3">
       <OrganismsSidebar />
     </div>
@@ -18,7 +19,7 @@ refreshCart()
         <NuxtPage />
       </div>
     </div>
-    <OrganismsCartModal/>
-    <AtomsModalBackground/>
+    <OrganismsCartModal />
+    <AtomsModalBackground />
   </div>
 </template>

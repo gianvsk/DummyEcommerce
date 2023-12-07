@@ -10,7 +10,6 @@ import { interactiveIcons } from '~/mock';
             </button>
             <MoleculesCart v-else/>
         </template>
-        <!-- <AtomsSimpleButton text="Become a seller"/> -->
         <button>
             <img src="/icons/Avater.png"/>
         </button>
